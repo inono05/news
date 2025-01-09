@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:news/src/commons/constants/app_sizes.dart';
 import 'package:news/src/commons/constants/app_strings.dart';
 import 'package:news/src/commons/extensions/app_context_extension.dart';
 import 'package:news/src/commons/extensions/app_widget_extension.dart';
 import 'package:news/src/commons/widgets/components/app_title.dart';
+import 'package:news/src/core/routing/app_router.dart';
 
 import '../../../../generated/assets.gen.dart';
 
@@ -125,39 +127,44 @@ class NewsView extends StatelessWidget {
               AppTitle.h4(title: "Show More"),
             ],
           ),
-          Hero(
-            tag: "hero1",
-            child: Material(
-              child: Container(
-                height: AppSize.p120,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSize.p14),
-                  color: context.surface,
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(AppSize.p14),
-                      child: Assets.images.news.image(scale: 12),
-                    ),
-                    SizedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          AppTitle(
-                            title: "CNN Indenosia",
-                            fontWeight: FontWeight.w600,
-                          ),
-                          AppTitle(
-                            title: AppStrings.breakingNewsHint,
-                            maxLines: 3,
-                            fontWeight: FontWeight.w900,
-                          )
-                        ],
+          GestureDetector(
+            onTap: (){
+              context.pushNamed(AppRoutes.newsDetails.name);
+            },
+            child: Hero(
+              tag: "hero1",
+              child: Material(
+                child: Container(
+                  height: AppSize.p120,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppSize.p14),
+                    color: context.surface,
+                  ),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(AppSize.p14),
+                        child: Assets.images.news.image(scale: 12),
                       ),
-                    ).paddingSymmetric(horizontal: AppSize.p20).expanded()
-                  ],
+                      SizedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AppTitle(
+                              title: "CNN Indenosia",
+                              fontWeight: FontWeight.w600,
+                            ),
+                            AppTitle(
+                              title: AppStrings.breakingNewsHint,
+                              maxLines: 3,
+                              fontWeight: FontWeight.w900,
+                            )
+                          ],
+                        ),
+                      ).paddingSymmetric(horizontal: AppSize.p20).expanded()
+                    ],
+                  ),
                 ),
               ),
             ),

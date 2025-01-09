@@ -21,21 +21,23 @@ class SplashView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.black.withValues(alpha: 1),
           image: DecorationImage(
-            image: AssetImage(Assets.images.news.path),
+            image: AssetImage(Assets.images.news01.path),
             fit: BoxFit.cover,
-            opacity: .5,
+            opacity: .2,
           ),
         ),
         child: Column(
-          spacing: AppSize.p14,
+          spacing: AppSize.p4,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(),
-            AppTitle.h2(
+            AppTitle.h1(
               title: "Stay Informed from Day One".toUpperCase(),
               fontWeight: FontWeight.bold,
               color: context.surface,
+              maxLines: 2,
+              textAlign: TextAlign.center,
             ),
             AppTitle(
               title: AppStrings.splashSubtitle,
@@ -47,7 +49,7 @@ class SplashView extends StatelessWidget {
               title: "Getting Started",
               onPressed: () => context.goNamed(AppRoutes.news.name),
             ),
-            AppSize.p32.heightBox,
+            AppSize.p48.heightBox,
           ],
         ),
       ),

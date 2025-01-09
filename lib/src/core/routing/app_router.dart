@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:news/src/features/discoveries/ui/discoveries_view.dart';
 import 'package:news/src/features/favourites/ui/favourites_view.dart';
+import 'package:news/src/features/news/ui/news_details_view.dart';
 import 'package:news/src/features/news/ui/news_view.dart';
 import 'package:news/src/features/profile/ui/profile_view.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -10,6 +11,7 @@ import '../../features/home/ui/home_navigation_view.dart';
 import '../../features/splash/ui/splash_view.dart';
 
 part 'app_router.g.dart';
+
 //privates navigators keys
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _newsNavigatorKey = GlobalKey<NavigatorState>(debugLabel: "news");
@@ -26,6 +28,7 @@ enum AppRoutes {
   emailVerify,
   home,
   news,
+  newsDetails,
   discoveries,
   favourites,
 
@@ -33,7 +36,7 @@ enum AppRoutes {
 }
 
 @riverpod
-GoRouter appRouter(AppRouterRef ref){
+GoRouter appRouter(AppRouterRef ref) {
   return GoRouter(
     initialLocation: '/',
     navigatorKey: _rootNavigatorKey,
@@ -60,10 +63,10 @@ GoRouter appRouter(AppRouterRef ref){
       ),
       StatefulShellRoute.indexedStack(
         builder: (
-            context,
-            state,
-            navigationShell,
-            ) {
+          context,
+          state,
+          navigationShell,
+        ) {
           return HomeNavigationView(navigationShell: navigationShell);
         },
         branches: [
@@ -76,6 +79,15 @@ GoRouter appRouter(AppRouterRef ref){
                 pageBuilder: (context, state) {
                   return NoTransitionPage(child: NewsView());
                 },
+                routes: [
+                  GoRoute(
+                    path: 'details',
+                    name: AppRoutes.newsDetails.name,
+                    pageBuilder: (context, state){
+                      return NoTransitionPage(child: NewsDetailsView());
+                    }
+                  )
+                ],
               ),
             ],
           ),
